@@ -6,7 +6,7 @@ export const TodoList = () => {
     const [inputValue, setInputValue] = useState('')
 
     function handleChange(e) {
-       // console.log(e)
+        // console.log(e)
         setInputValue(e.target.value)
     }
 
@@ -24,16 +24,17 @@ export const TodoList = () => {
         setTodos(newTodos)
     }
     return (
-        <div>
+        <div className="Todo">
             <h1>Todo List</h1>
-            <form>
-                <input type='text' value={inputValue} onChange={handleChange} />
+            <div className="Top">
+                <input className='input' type='text' value={inputValue} onChange={handleChange} 
+                placeholder="Enter a task"/>
                 <button onClick={handleSubmit}>Add Todo</button>
-            </form>
+            </div>
             <ul>
                 {todos.map((todo, index) => (
                     <li key={index}>{todo}
-                        <button onClick={() => handleDelete(index)}>Delete</button>
+                        <button className='btn' onClick={() => handleDelete(index)}>Delete</button>
                     </li>
                 ))}
             </ul>
