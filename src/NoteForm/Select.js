@@ -14,7 +14,8 @@ export const ModalSelect = ({ onChangeHandler, options, defaultValue, fieldName,
             <Form>
                 <Form.Group className="select" controlId={fieldName}>
                     <Form.Label>{label}</Form.Label>
-                    <Form.Select ref={select} aria-label="select" defaultValue={defaultValue} onChange={onChangeHandler} >
+                    <Form.Select ref={select} aria-label="select" 
+                    defaultValue={defaultValue} onChange={onChangeHandler} >
                         {options.map((value, index) => (
                             <option key={index} value={value}>
                                 {value}

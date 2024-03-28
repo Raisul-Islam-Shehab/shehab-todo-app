@@ -1,44 +1,44 @@
 import React from 'react'
-import Table from 'react-bootstrap/Table'
 import { NoteForm } from './NoteForm/NoteForm'
-import { Button } from 'react-bootstrap'
+import { Button, Container, Row, Col, Card } from 'react-bootstrap'
 
-export const NoteTable = ({ notes, updateNote, deleteNote }) => {
+export const NoteTable = ({ notes, updateNote, deleteNote, searchItem }) => {
+    // console.log(isSearch)
+    let filteredNotes = notes;
+    if (searchItem.trim().length !== 0) {
+        filteredNotes = notes.filter((note) =>
+            note.title.toLowerCase().includes(searchItem.toLowerCase()))
+    }
+
+
     return (
         <div>
-            <Table striped bordered hover size='xl'>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Priority</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {notes.map((note, i) => {
+            <Container>
+                <Row xs={1} xl={3} md={2}>
+                    {filteredNotes.map((note, index) => {
                         return (
-                            <tr key={i}>
-                                {console.log(note.id)}
-                                <td>{note.title}</td>
-                                <td>{note.desc}</td>
-                                <td>{note.priority}</td>
-                                <td>{note.status}</td>
-                                <td>
-                                    <NoteForm
-                                        submitNote={updateNote} label={"Update"} variant={"secondary"} 
-                                        defaultNote={note} />
-                                    <Button
-                                        variant="danger"
-                                        onClick={() => deleteNote(note.id)}>Delete</Button>
-                                </td>
-                            </tr>
+                            <Col key={index}>
+                                <Card key={index} className="card-item mb-3">
+                                    <Card.Header as='h3'>{note.title}</Card.Header>
+                                    <Card.Body>
+                                        <Card.Text>{note.title}</Card.Text>
+                                    </Card.Body>
+                                    <Card.Footer>
+                                        <Button>Details</Button>{' '}
+                                        <NoteForm
+                                            submitNote={updateNote}
+                                            label={"Update"} variant={"secondary"}
+                                            defaultNote={note} />
+                                        {' '} <Button className='mb-1'
+                                            variant="danger"
+                                            onClick={() => deleteNote(note.id)}>Delete</Button>
+                                    </Card.Footer>
+                                </Card>
+                            </Col>
                         )
                     })}
-
-                </tbody>
-            </Table>
+                </Row>
+            </Container >
         </div>
     )
 }
