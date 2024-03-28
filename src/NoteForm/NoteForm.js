@@ -63,7 +63,7 @@ export const NoteForm = ({ submitNote, label, variant, defaultNote }) => {
 
   return (
     <>
-      <Button variant={variant} onClick={handleShow}>
+      <Button variant={variant} onClick={handleShow} className='mt-1'>
         {label}
       </Button>
       <GetModal show={show} handleClose={handleClose}

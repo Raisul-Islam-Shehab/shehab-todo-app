@@ -2,7 +2,7 @@ import React from 'react'
 import { NoteForm } from './NoteForm/NoteForm'
 import { Button, Container, Row, Col, Card } from 'react-bootstrap'
 
-export const NoteTable = ({ notes, updateNote, deleteNote, searchItem }) => {
+export const NoteTable = ({ notes, updateNote, deleteNote, searchItem, sortItem }) => {
     // console.log(isSearch)
     let filteredNotes = notes;
     if (searchItem.trim().length !== 0) {
@@ -10,6 +10,9 @@ export const NoteTable = ({ notes, updateNote, deleteNote, searchItem }) => {
             note.title.toLowerCase().includes(searchItem.toLowerCase()))
     }
 
+    if (sortItem) {
+        filteredNotes.sort((a, b) => a.sortItem - b.sortItem)
+    }
 
     return (
         <div>
@@ -24,12 +27,12 @@ export const NoteTable = ({ notes, updateNote, deleteNote, searchItem }) => {
                                         <Card.Text>{note.title}</Card.Text>
                                     </Card.Body>
                                     <Card.Footer>
-                                        <Button>Details</Button>{' '}
+                                        {/* <Button className='mt-1'>Details</Button>{' '} */}
                                         <NoteForm
                                             submitNote={updateNote}
                                             label={"Update"} variant={"secondary"}
                                             defaultNote={note} />
-                                        {' '} <Button className='mb-1'
+                                        {' '} <Button className='mt-1'
                                             variant="danger"
                                             onClick={() => deleteNote(note.id)}>Delete</Button>
                                     </Card.Footer>

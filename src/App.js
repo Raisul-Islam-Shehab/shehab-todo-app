@@ -41,7 +41,8 @@ function App() {
   ]
   const [notes, setNotes] = useState(mockNotes);
   const [searchItem, setSearchItem] = useState("")
-  const [isSearch, setIsSearch] = useState(false)
+  // const [isSearch, setIsSearch] = useState(false)
+  const [sortItem, setSortItem] = useState("")
 
   const addNote = (newNote) => {
     setNotes([...notes, newNote])
@@ -72,7 +73,12 @@ function App() {
     // console.log(`Name: ${e.target.id} | Value: ${e.target.value}`)
     setSearchItem(e.target.value)
     // console.log(searchItem)
-    setIsSearch(true)
+    // setIsSearch(true)
+  }
+
+  const handleSort = (key) => {
+    setSortItem(key)
+    // console.log(sortItem)
   }
 
 
@@ -96,43 +102,28 @@ function App() {
               />
             </Form>
           </Nav>
-          <NavDropdown title="Sort By" id="sort" className='me-auto'>
+          <NavDropdown title="Sort By" id="sort" className='mt-1' onSelect={handleSort}>
 
-            <NavDropdown.Item>
+            <NavDropdown.Item
+
+              eventKey='priority'>
               priority
             </NavDropdown.Item>
 
-            <NavDropdown.Item >
+            <NavDropdown.Item
+
+              eventKey='status'>
               status
             </NavDropdown.Item>
 
           </NavDropdown>
 
-          <NavDropdown title="Filter By" id="filter">
-
-            <NavDropdown.Item >
-              action
-            </NavDropdown.Item>
-
-            <NavDropdown.Item >
-              Another action
-            </NavDropdown.Item>
-
-            <NavDropdown.Item>
-              Something
-            </NavDropdown.Item>
-
-            <NavDropdown.Item>
-              Separated link
-            </NavDropdown.Item>
-
-          </NavDropdown>
         </Container>
       </Navbar>
       {/* <NoteForm submitNote={addNote} label={"Add Note"} variant={"primary"} /> */}
       <br /> <br />
       <NoteTable notes={notes} deleteNote={deleteNote}
-        updateNote={updateNote} isSearch={isSearch}
+        updateNote={updateNote}
         searchItem={searchItem} />
     </div >
 
