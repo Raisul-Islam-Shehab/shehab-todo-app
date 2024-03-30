@@ -12,7 +12,7 @@ export const ModalForm = ({ label, pHolder, type = "text", fieldName, onChangeHa
     return (
         <>
             <Form>
-                <Form.Group className={fieldName} controlId={fieldName}>
+                <Form.Group controlId={fieldName}>
                     <Form.Label>{label}</Form.Label>
                     <Form.Control
                         type={type}
